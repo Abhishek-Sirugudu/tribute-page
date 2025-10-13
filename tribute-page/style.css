@@ -1,0 +1,40 @@
+body {
+    background-color: #f0f0f0; 
+    font-family: sans-serif;   
+    color: #333;               
+}
+
+h1 {
+    color: #0056b3;           
+    font-size: 48px;          
+}
+img {
+    border: 5px solid #0056b3; 
+    padding: 50px;             
+}
+
+.container {
+    width: 80%; 
+    max-width: 900px; 
+    margin: 0 auto; 
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    max-width: 550px;
+    margin: 20px auto;
+}
+
+li {
+    background-color: #ffffff; 
+    border: 1px solid #ddd;   
+    padding: 15px;            
+    margin-bottom: 10px;      
+}
+
+img {
+    border-radius: 10px; /* This will soften the image's corners */
+}
