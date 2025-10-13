@@ -10,7 +10,8 @@ h1 {
 }
 img {
     border: 5px solid #0056b3; 
-    padding: 50px;             
+    padding: 50px;          
+    border-radius: 10px;    
 }
 
 .container {
@@ -35,6 +36,4 @@ li {
     margin-bottom: 10px;      
 }
 
-img {
-    border-radius: 10px; /* This will soften the image's corners */
-}
+
