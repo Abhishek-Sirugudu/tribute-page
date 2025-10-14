@@ -1,0 +1,39 @@
+/* Navbar Styles */
+.navbar {
+    display: flex;                 /* Turns the navbar into a flex container */
+    justify-content: space-between; /* Pushes the logo and links to opposite ends */
+    align-items: center;           /* Vertically aligns them in the middle */
+    background-color: #333;
+    padding: 1rem; /* 1rem is roughly 16px, a common unit for spacing */
+}
+
+.nav-links {
+    display: flex;            /* Makes the list itself a flex container */
+    list-style-type: none;    /* Removes the bullet points */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    padding: 0 15px;          /* Adds space BETWEEN the links */
+}
+
+
+.logo, .nav-links a {
+    color: white;
+    text-decoration: none;    /* Removes the underline from links */
+    font-size: 1.1rem;
+}
+body.dark-mode {
+    background-color: #222;
+    color: #f0f0f0;
+}
+
+body.dark-mode .navbar,
+body.dark-mode li {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode li {
+    border-color: #444;
+}
