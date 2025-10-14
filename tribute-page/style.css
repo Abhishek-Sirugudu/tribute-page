@@ -36,4 +36,22 @@ li {
     margin-bottom: 10px;      
 }
 
+@media (max-width: 600px) {
+    .container {
+        width: 95%; /* Use more of the screen on small devices */
+    }
 
+    h1 {
+        font-size: 36px; /* Make the main heading smaller to prevent awkward wrapping */
+    }
+
+    img {
+        /* Make the image responsive so it never overflows its container */
+        width: 100%; 
+        max-width: 300px;
+    }
+
+    ul {
+        text-align: center; /* Center-align the list items for a cleaner look on mobile */
+    }
+}
