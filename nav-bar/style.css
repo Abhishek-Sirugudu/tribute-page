@@ -37,3 +37,17 @@ body.dark-mode li {
 body.dark-mode li {
     border-color: #444;
 }
+
+.todo-container {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+body.dark-mode .todo-container {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
