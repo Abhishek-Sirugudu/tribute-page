@@ -51,3 +51,8 @@ body.dark-mode .todo-container {
     background-color: #3a3a3a;
     border-color: #555;
 }
+
+li.completed {
+    text-decoration: line-through;
+    color: #888;
+}

@@ -2,28 +2,10 @@ const button = document.querySelector("#theme-toggle");
 
 const body = document.querySelector("body");
 
-button.addEventListener("click", function() {
+button.addEventListener("click", function () {
     body.classList.toggle("dark-mode");
     console.log("Theme has been changed");
 });
-
-
-console.log("--- Day 5: Arrays and Loops ---");
-
-const arr = ["Learn HTML", "Learn CSS", "Learn JavaScript"];
-console.log("My tasks:");
-console.log("First task",arr[0]);
-
-console.log("Total tasks :",arr.length);
-
-arr.push("Practice with a To-Do List");
-console.log("After pushing ",arr);
-
-console.log("all tasks :");
-
-for(const i of arr){
-    console.log("-",i);
-}
 
 
 // --- To-Do List Logic ---
@@ -34,32 +16,61 @@ const addTodoBtn = document.querySelector("#add-todo-btn");
 const todoList = document.querySelector("#todo-list");
 
 // 2. This array is our "source of truth". It will hold all our to-do items.
-const todos = ["Finish Day 5 tasks", "Tweet my progress"];
+// The old way:
+// const todos = ["Finish Day 5 tasks", "Tweet my progress"];
 
-// 3. This function's job is to render the 'todos' array to the screen
+// The new, more powerful way:
+const todos = [
+    { text: "Finish Day 6 tasks", completed: true },
+    { text: "Tweet my progress", completed: false }
+];
+
 function renderTodos() {
-    // First, clear the existing list to avoid duplicates
+    // Clear the list first
     todoList.innerHTML = "";
 
-    // Loop through the 'todos' array. For each todo, create a new <li> and add it to the <ul>.
-    for (const todo of todos) {
-        const li = document.createElement("li"); // Create a new <li> element
-        li.textContent = todo;                   // Set its text
-        todoList.appendChild(li);                // Add it to the list in the HTML
-    }
+    // We use .forEach here because it gives us both the item (todo) and its index
+    todos.forEach((todo, index) => {
+        // Create the <li> element
+        const li = document.createElement("li");
+
+        // Set its text from the object's 'text' property
+        li.textContent = todo.text;
+
+        // Add a 'completed' class if the task is done
+        if (todo.completed) {
+            li.classList.add("completed");
+        }
+
+        // *** NEW FEATURE: Add a click event to each <li> ***
+        li.addEventListener("click", function() {
+            // When clicked, update the 'completed' property in the array
+            todos[index].completed = !todos[index].completed;
+
+            // Then, re-render the entire list to show the change
+            renderTodos();
+        });
+
+        // Add the new <li> to the <ul> in the HTML
+        todoList.appendChild(li);
+    });
 }
 
 // 4. Set up the event listener for the "Add Task" button
-addTodoBtn.addEventListener("click", function() {
+addTodoBtn.addEventListener("click", function () {
     const newTask = todoInput.value; // Get the text from the input box
 
     // Add the new task to our array, but only if the input isn't empty
+    // Inside the addTodoBtn click listener...
     if (newTask.trim() !== "") {
-        todos.push(newTask);      // Add to the array
-        todoInput.value = "";     // Clear the input field
-        renderTodos();            // Call the render function to update the screen
+        // We now push a new object to the array
+        todos.push({ text: newTask, completed: false });
+
+        todoInput.value = "";
+        renderTodos();
     }
 });
 
 // 5. Initial Render: Call the function once to show the starting tasks
 renderTodos();
+
