@@ -43,7 +43,7 @@ function renderTodos() {
         }
 
         // *** NEW FEATURE: Add a click event to each <li> ***
-        li.addEventListener("click", function() {
+        li.addEventListener("click", function () {
             // When clicked, update the 'completed' property in the array
             todos[index].completed = !todos[index].completed;
 
@@ -74,3 +74,36 @@ addTodoBtn.addEventListener("click", function () {
 // 5. Initial Render: Call the function once to show the starting tasks
 renderTodos();
 
+
+
+// --- Fetch API Logic ---
+const fetchBtn = document.querySelector("#fetch-users-btn");
+const userList = document.querySelector("#user-list");
+
+fetchBtn.addEventListener("click", () => {
+    console.log("Fetching users...");
+    userList.innerHTML = "<li>Loading...</li>"; // Provide immediate feedback to the user
+
+    // 1. Start the fetch request
+    fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => {
+            // This is the first promise. We get the response object and call .json()
+            return response.json();
+        })
+        .then(users => {
+            // This is the second promise. We now have the actual user data.
+            userList.innerHTML = ""; // Clear the 'Loading...' text
+
+            // Loop through the array of users and display their names
+            for (const user of users) {
+                const li = document.createElement("li");
+                li.textContent = user.name;
+                userList.appendChild(li);
+            }
+        })
+        .catch(error => {
+            // .catch() runs if any part of the promise chain fails (e.g., network error)
+            console.error("Failed to fetch users:", error);
+            userList.innerHTML = "<li>Failed to load users.</li>";
+        });
+});

@@ -42,3 +42,25 @@ console.log("Is the user coding?", user.isCoding);
 
 // Calling the object's method
 user.greet(); // Should print "Hello, my name is Abhishek"
+
+console.log("--- Day 7: Asynchronous JavaScript ---");
+
+// We create a new Promise. It takes a function with two arguments: resolve and reject.
+const myFirstPromise = new Promise((resolve, reject) => {
+    console.log("Promise started... (This will take 2 seconds)");
+
+    // setTimeout simulates a network request or other long task
+    setTimeout(() => {
+        // After 2 seconds, we "fulfill" the promise by calling resolve()
+        resolve("Success! The data has arrived."); 
+    }, 2000);
+});
+
+console.log("This message appears immediately, while the promise is still pending.");
+
+// We use the .then() method to run code AFTER the promise is fulfilled.
+// The value we passed to resolve() is given to us here.
+myFirstPromise.then((message) => {
+    console.log("Promise fulfilled!");
+    console.log(message); // Prints "Success! The data has arrived."
+});
