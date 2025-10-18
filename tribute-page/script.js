@@ -64,3 +64,31 @@ myFirstPromise.then((message) => {
     console.log("Promise fulfilled!");
     console.log(message); // Prints "Success! The data has arrived."
 });
+
+console.log("--- Day 8: Modern Async/Await ---");
+
+// This function returns a promise that resolves after a delay
+function getDelayedMessage() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("Success from async/await!");
+        }, 2000);
+    });
+}
+
+// We create an async function to use the await keyword
+async function runAsyncCode() {
+    console.log("Async function started...");
+    try {
+        // The 'await' keyword pauses here until the promise is fulfilled
+        const message = await getDelayedMessage(); 
+        console.log("Promise fulfilled!");
+        console.log(message); // This line only runs after the delay
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+    console.log("Async function finished.");
+}
+
+// Call the async function
+runAsyncCode();

@@ -77,33 +77,36 @@ renderTodos();
 
 
 // --- Fetch API Logic ---
+// --- Modern Fetch API Logic with async/await ---
 const fetchBtn = document.querySelector("#fetch-users-btn");
 const userList = document.querySelector("#user-list");
 
-fetchBtn.addEventListener("click", () => {
-    console.log("Fetching users...");
-    userList.innerHTML = "<li>Loading...</li>"; // Provide immediate feedback to the user
+// 1. Create a dedicated async function to handle fetching
+async function fetchUsers() {
+    console.log("Fetching users with async/await...");
+    userList.innerHTML = "<li>Loading...</li>";
 
-    // 1. Start the fetch request
-    fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => {
-            // This is the first promise. We get the response object and call .json()
-            return response.json();
-        })
-        .then(users => {
-            // This is the second promise. We now have the actual user data.
-            userList.innerHTML = ""; // Clear the 'Loading...' text
+    // 2. Use a try...catch block for error handling
+    try {
+        // 3. 'await' the fetch call
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
 
-            // Loop through the array of users and display their names
-            for (const user of users) {
-                const li = document.createElement("li");
-                li.textContent = user.name;
-                userList.appendChild(li);
-            }
-        })
-        .catch(error => {
-            // .catch() runs if any part of the promise chain fails (e.g., network error)
-            console.error("Failed to fetch users:", error);
-            userList.innerHTML = "<li>Failed to load users.</li>";
+        // 4. 'await' the .json() conversion
+        const users = await response.json();
+
+        // 5. Render the results
+        userList.innerHTML = ""; // Clear 'Loading...'
+        users.forEach(user => {
+            const li = document.createElement("li");
+            li.textContent = user.name;
+            userList.appendChild(li);
         });
-});
+
+    } catch (error) {
+        console.error("Failed to fetch users:", error);
+        userList.innerHTML = "<li>Failed to load users.</li>";
+    }
+}
+
+// 6. The event listener now has a single, clear job: call our async function
+fetchBtn.addEventListener("click", fetchUsers);
